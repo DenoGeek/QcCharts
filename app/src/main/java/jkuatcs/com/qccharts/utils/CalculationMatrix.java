@@ -1,6 +1,10 @@
 package jkuatcs.com.qccharts.utils;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jkuatcs.com.qccharts.models.QData;
 import jkuatcs.com.qccharts.models.QcConstants;
 
 // Class containing calculations for X and R chart generation formulaes
@@ -10,9 +14,15 @@ public class CalculationMatrix {
     private double xbar;
     private double rbar;
 
-    public CalculationMatrix(double xbar, double rbar) {
-        this.xbar = xbar;
-        this.rbar = rbar;
+
+    public CalculationMatrix(QData qData) {
+        int sumx = 0, sumr = 0;
+
+        sumx += qData.r;
+        sumr += qData.x_bar;
+
+
+
     }
 
 
@@ -23,6 +33,7 @@ public class CalculationMatrix {
 
 
     private double getRbar(){
+
 
         return this.rbar;
 
@@ -68,5 +79,7 @@ public class CalculationMatrix {
 
         return result;
     }
+
+
 
 }
