@@ -10,9 +10,7 @@ public class QcTable {
     private List<QcConstants> qcConstants;
 
     public QcTable(){
-
         init();
-
     }
 
     private void init() {
