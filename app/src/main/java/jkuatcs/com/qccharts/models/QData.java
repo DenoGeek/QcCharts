@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class QData {
 
     public double x_bar;
-    public double y_bar;
+    public double r;
     public String size_values;
 
     public ArrayList<Integer> getSizesAsInts(){
