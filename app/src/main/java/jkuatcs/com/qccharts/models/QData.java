@@ -1,0 +1,22 @@
+package jkuatcs.com.qccharts.models;
+
+import android.content.Intent;
+
+import java.util.ArrayList;
+
+public class QData {
+
+    public double x_bar;
+    public double y_bar;
+    public String size_values;
+
+    public ArrayList<Integer> getSizesAsInts(){
+        ArrayList<Integer> all = new ArrayList<>();
+        for(String s: size_values.split(",")){
+            all.add(Integer.valueOf(s));
+        }
+        return all;
+    }
+
+
+}
