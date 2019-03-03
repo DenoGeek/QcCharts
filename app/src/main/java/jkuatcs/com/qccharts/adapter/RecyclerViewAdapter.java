@@ -1,4 +1,4 @@
-package jkuatcs.com.qccharts;
+package jkuatcs.com.qccharts.adapter;
 
 
 import android.content.Context;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import jkuatcs.com.qccharts.R;
 import jkuatcs.com.qccharts.models.QData;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
