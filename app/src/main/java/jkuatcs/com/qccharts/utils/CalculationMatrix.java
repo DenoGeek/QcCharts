@@ -11,24 +11,25 @@ import jkuatcs.com.qccharts.models.QcConstants;
 public class CalculationMatrix {
 
 
-    private double xbar;
+    private double xmean;
     private double rbar;
 
 
-    public CalculationMatrix(QData qData) {
+    public CalculationMatrix(List<QData> qData) {
+
         int sumx = 0, sumr = 0;
-
-        sumx += qData.r;
-        sumr += qData.x_bar;
-
-
-
+        for(QData q:qData){
+            sumx += q.x_bar;
+            sumr += q.r;
+        }
+        xmean = sumx/qData.size();
+        rbar = sumr/qData.size();
     }
 
 
     // CL for x bar chart
     private double getXbar(){
-        return this.xbar;
+        return this.xmean;
     }
 
 
@@ -54,7 +55,7 @@ public class CalculationMatrix {
     private double getXUCL(QcConstants qcConstants){
         double result = 0;
 
-        result = xbar + (qcConstants.A_2 * rbar);
+        result = xmean + (qcConstants.A_2 * rbar);
 
         return result;
     }
