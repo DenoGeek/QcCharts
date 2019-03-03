@@ -1,6 +1,8 @@
 package jkuatcs.com.qccharts.utils;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +24,8 @@ public class CalculationMatrix {
             sumx += q.x_bar;
             sumr += q.r;
         }
-        xmean = sumx/qData.size();
-        rbar = sumr/qData.size();
+        xmean = sumx/(double)qData.size();
+        rbar = sumr/(double)qData.size();
     }
 
 
@@ -42,17 +44,15 @@ public class CalculationMatrix {
 
 
     //LCL and UCL methods for x  chart
-    private double getXLCL(QcConstants qcConstants){
+    public double getXLCL(QcConstants qcConstants){
         double result = 0;
-
         result = getXbar() - (qcConstants.A_2 * getRbar());
-
         return result;
 
     }
 
 
-    private double getXUCL(QcConstants qcConstants){
+    public double getXUCL(QcConstants qcConstants){
         double result = 0;
 
         result = xmean + (qcConstants.A_2 * rbar);
@@ -63,7 +63,7 @@ public class CalculationMatrix {
 
 
     //LCL UCL for R  chart
-    private double getRLCL(QcConstants qcConstants ){
+    public double getRLCL(QcConstants qcConstants ){
         double result = 0;
 
         result =  (qcConstants.D_3 * getRbar());
@@ -73,7 +73,7 @@ public class CalculationMatrix {
     }
 
 
-    private double getRUCL(QcConstants qcConstants){
+    public double getRUCL(QcConstants qcConstants){
         double result = 0;
 
         result = (qcConstants.D_4 * getRbar());
