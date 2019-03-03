@@ -23,7 +23,7 @@ public class ChartActivity extends AppCompatActivity {
 
     private LineChart chart;
     private LineChart rchart;
-    TextView xucl,xlcl,rucl,rlcl;
+    TextView xucl,xlcl,rucl,rlcl,x_analysis,r_analysis;
 
     DecimalFormat df = new DecimalFormat("#.##");
 
@@ -39,6 +39,8 @@ public class ChartActivity extends AppCompatActivity {
         xlcl = findViewById(R.id.xlcl);
         rucl = findViewById(R.id.rucl);
         rlcl = findViewById(R.id.rlcl);
+        x_analysis = findViewById(R.id.x_analysis);
+        r_analysis = findViewById(R.id.r_analysis);
 
         // background color
         chart.setBackgroundColor(Color.WHITE);
@@ -80,7 +82,7 @@ public class ChartActivity extends AppCompatActivity {
 
         xucl.setText("X-UCL:"+df.format(calculationMatrix.getXUCL(qcTable.getSampleConstants(sample_size))));
         xlcl.setText("X-LCL:"+df.format(calculationMatrix.getXLCL(qcTable.getSampleConstants(sample_size))));
-
+        x_analysis.setText(calculationMatrix.xisOutOfBounds());
 
         for (int i = 0; i < qData.size(); i++) {
             values.add(new Entry(i, (float)qData.get(i).x_bar));
@@ -96,7 +98,7 @@ public class ChartActivity extends AppCompatActivity {
 
         x_lineSet = new LineDataSet(values, "X-Bar chart values");
         x_lineSet.setDrawIcons(false);
-        x_lineSet.setColor(Color.YELLOW);
+        x_lineSet.setColor(Color.parseColor("#FF5722"));
         x_lineSet.setCircleColor(Color.BLACK);
         x_lineSet.setLineWidth(1f);
         x_lineSet.setCircleRadius(3f);
@@ -138,6 +140,7 @@ public class ChartActivity extends AppCompatActivity {
 
         rucl.setText("R-UCL:"+df.format(calculationMatrix.getRUCL(qcTable.getSampleConstants(sample_size))));
         rlcl.setText("R-LCL:"+df.format(calculationMatrix.getRLCL(qcTable.getSampleConstants(sample_size))));
+        r_analysis.setText(calculationMatrix.risOutOfBounds());
 
 
         for (int i = 0; i < qData.size(); i++) {
@@ -154,7 +157,7 @@ public class ChartActivity extends AppCompatActivity {
 
         x_lineSet = new LineDataSet(values, "X-Bar chart values");
         x_lineSet.setDrawIcons(false);
-        x_lineSet.setColor(Color.YELLOW);
+        x_lineSet.setColor(Color.parseColor("#FF5722"));
         x_lineSet.setCircleColor(Color.BLACK);
         x_lineSet.setLineWidth(1f);
         x_lineSet.setCircleRadius(3f);
