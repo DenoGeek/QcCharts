@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import java.util.ArrayList;
 
+// one row in the table
 public class QData {
 
     public double x_bar;
