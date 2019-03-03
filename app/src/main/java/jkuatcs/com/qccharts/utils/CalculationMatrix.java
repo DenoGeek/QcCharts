@@ -79,7 +79,7 @@ public class CalculationMatrix {
             if(xucl<q.x_bar){
                 countabove += 1;
             }
-            if(xlcl<q.x_bar){
+            if(xlcl>q.x_bar){
                 countbelow += 1;
             }
         }
@@ -125,7 +125,7 @@ public class CalculationMatrix {
             if(rucl<q.r){
                 countabove += 1;
             }
-            if(rlcl<q.r){
+            if(rlcl>q.r){
                 countbelow += 1;
             }
         }
