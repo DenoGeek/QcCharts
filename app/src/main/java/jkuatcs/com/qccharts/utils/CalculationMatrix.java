@@ -84,9 +84,9 @@ public class CalculationMatrix {
             }
         }
         if(countabove > 0 || countbelow > 0){
-            message = countabove+" points lies above the UCL and "+countbelow+" lie below the LCL hence process is not under control";
+            message = countabove+" points lies above the UCL and "+countbelow+" lie below the LCL in the mean chart hence process is not under control";
         }else{
-            message = "Range chart lies within the control lines hence process is under control";
+            message = "All mean chart points lies within the control lines hence process is under control";
         }
         return message;
     }
@@ -130,9 +130,9 @@ public class CalculationMatrix {
             }
         }
         if(countabove > 0 || countbelow > 0){
-            message = countabove+" points lies above the UCL and "+countbelow+" lie below the LCL hence process is not under control";
+            message = countabove+" points lies above the UCL and "+countbelow+" lie below the LCL in the range chart hence process is not under control";
         }else{
-            message = "Range chart lies within the control lines hence process is under control";
+            message = "All range chart points lies within the control lines hence process is under control";
         }
         return message;
     }
