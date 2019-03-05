@@ -1,41 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.motion.MotionLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:id="@+id/main_motion_layout_container"
-    app:layoutDescription="@xml/main_motion_layout_q_scene">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_custom_q_top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_custom_q_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_custom_q_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.35" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_custom_q_end"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.65" />
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.constraint.motion.MotionLayout
         android:id="@+id/type_selection_motion_layout"
@@ -43,7 +11,6 @@
         android:layout_height="match_parent"
         android:alpha="1.0"
         android:background="#ffffffff"
-        app:layoutDescription="@xml/type_selection_layout_scenes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.45" />
+            app:layout_constraintGuide_percent="0.55" />
 
         <Button
             android:id="@+id/samples_main_select_btn"
@@ -76,10 +43,13 @@
             android:text="@string/samples_request_main"
             android:textColor="#ff707070"
             android:textSize="16sp"
+            android:padding="10dp"
             android:background="@drawable/samples_btn_bg"
             android:textAllCaps="false"
-            android:alpha="1.0"
-            android:visibility="visible"
+            android:alpha="0.0"
+            android:visibility="invisible"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             app:layout_constraintBottom_toTopOf="@+id/guideline_samples_btn_start"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -91,8 +61,8 @@
             android:text="@string/samples_request_qsn"
             android:textSize="16sp"
             android:layout_marginBottom="30dp"
-            android:alpha="1.0"
-            android:visibility="visible"
+            android:alpha="0.0"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/samples_main_select_btn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -112,10 +82,11 @@
 
         <Button
             android:id="@+id/mean_values_main_select_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mean_values_request_main"
+            android:layout_width="70dp"
+            android:layout_height="25dp"
+            android:text="@string/back"
             android:textSize="16sp"
+            android:padding="0dp"
             android:background="@drawable/mean_values_btn_bg"
             android:layout_marginTop="30dp"
             android:textAllCaps="false"
@@ -123,8 +94,7 @@
             android:alpha="1.0"
             android:visibility="visible"
             app:layout_constraintTop_toBottomOf="@+id/mean_values_request_txt"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
             android:id="@+id/sample_size_edit"
@@ -165,7 +135,7 @@
             android:text="@string/sample_size_indicate"
             android:textColor="#ff707070"
             android:layout_marginTop="20dp"
-            android:alpha="0.0"
+            android:alpha="1.0"
             android:translationY="-20dp"
             app:layout_constraintTop_toBottomOf="@+id/guideline_samples_btn_start"
             app:layout_constraintStart_toStartOf="parent"
@@ -180,7 +150,7 @@
             android:paddingBottom="2dp"
             android:textAlignment="center"
             android:textColor="#ffffffff"
-            android:alpha="0.0"
+            android:alpha="1.0"
             android:translationY="-20dp"
             app:layout_constraintBottom_toBottomOf="@+id/sample_size_indicate"
             app:layout_constraintDimensionRatio="h,1:1"
@@ -194,7 +164,7 @@
             android:text="@string/sample_number_indicate"
             android:textColor="#ff707070"
             android:layout_marginTop="20dp"
-            android:alpha="0.0"
+            android:alpha="1.0"
             android:translationY="-10dp"
             app:layout_constraintTop_toBottomOf="@+id/guideline_samples_btn_start"
             app:layout_constraintEnd_toEndOf="@+id/sample_size_indicate"/>
@@ -208,7 +178,7 @@
             android:paddingBottom="2dp"
             android:textAlignment="center"
             android:textColor="#ffffffff"
-            android:alpha="0.0"
+            android:alpha="1.0"
             android:translationY="-10dp"
             app:layout_constraintBottom_toBottomOf="@+id/sample_size_indicate"
             app:layout_constraintDimensionRatio="h,1:1"
@@ -219,14 +189,14 @@
             android:id="@+id/start_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:textColor="#ffffffff"
-            android:background="@drawable/start_button"
             android:layout_marginTop="60dp"
             android:alpha="0.0"
-            app:layout_constraintTop_toBottomOf="@+id/sample_number_indicate"
+            android:background="@drawable/btn_start_bg"
+            android:textAllCaps="false"
+            android:textColor="#ffffffff"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/sample_number_indicate" />
 
         <EditText
             android:id="@+id/mean_sample_number_edit"
@@ -236,10 +206,11 @@
             android:inputType="number"
             android:hint="@string/sample_number_hint"
             android:backgroundTint="#A71B82"
-            android:scaleX="0.5"
+            android:scaleX="1.0"
             android:transformPivotX="200dp"
             android:alpha="1.0"
             android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
             app:layout_constraintStart_toEndOf="@+id/mean_values_main_select_btn"
             app:layout_constraintTop_toTopOf="@+id/mean_values_main_select_btn"
             app:layout_constraintBottom_toBottomOf="@+id/mean_values_main_select_btn"/>
@@ -254,7 +225,6 @@
             android:alpha="1.0"
             android:background="@drawable/text_side_btn_bg"
             android:textSize="18sp"
-            app:layout_constraintDimensionRatio="h,2:1"
             app:layout_constraintStart_toEndOf="@+id/mean_sample_number_edit"
             app:layout_constraintTop_toTopOf="@+id/mean_sample_number_edit"
             app:layout_constraintBottom_toBottomOf="@+id/mean_sample_number_edit"/>
@@ -266,7 +236,7 @@
             android:text="@string/sample_number_indicate"
             android:textColor="#ff707070"
             android:layout_marginTop="20dp"
-            android:alpha="0.0"
+            android:alpha="1.0"
             android:translationY="-10dp"
             app:layout_constraintTop_toBottomOf="@+id/mean_values_main_select_btn"
             app:layout_constraintEnd_toEndOf="parent"
@@ -281,7 +251,7 @@
             android:paddingBottom="2dp"
             android:textAlignment="center"
             android:textColor="#ffffffff"
-            android:alpha="0.0"
+            android:alpha="1.0"
             android:translationY="-10dp"
             app:layout_constraintBottom_toBottomOf="@+id/mean_sample_number_indicate"
             app:layout_constraintDimensionRatio="h,1:1"
@@ -296,189 +266,12 @@
             android:textColor="#ffffffff"
             android:background="@drawable/start_button"
             android:layout_marginTop="30dp"
-            android:alpha="0.0"
+            android:alpha="1.0"
             app:layout_constraintTop_toBottomOf="@+id/mean_sample_number_indicate"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-    </android.support.constraint.motion.MotionLayout>
-
-    <android.support.constraint.motion.MotionLayout
-        android:id="@+id/launch_only_splash_screen_motion_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/splash_screen_bg"
-        app:layoutDescription="@xml/launch_splash_screen_scene"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="visible"
-        android:translationX="0dp">
-
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_custom_chart_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.6" />
-
-        <ImageView
-            android:id="@+id/control_chart_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleX="1.0"
-            android:scaleY="1.0"
-            android:transformPivotX="100dp"
-            android:transformPivotY="100dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/guideline_custom_chart_top"
-            app:srcCompat="@drawable/control_chart" />
-
-        <ImageView
-            android:id="@+id/control_chart_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:scaleX="1.0"
-            android:transformPivotX="100dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/guideline_custom_chart_top"
-            app:srcCompat="@drawable/control_chart_stretch" />
-    </android.support.constraint.motion.MotionLayout>
-
-    <android.support.constraint.motion.MotionLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:id="@+id/full_custom_q_motion_layout"
-        app:layoutDescription="@xml/splash_screen_scene_custom_q"
-        app:layout_constraintTop_toBottomOf="@+id/guideline_custom_q_top"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_custom_q_bottom"
-        app:layout_constraintStart_toEndOf="@+id/guideline_custom_q_start"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_custom_q_end">
-
-        <ImageView
-            android:id="@+id/q_round"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/guideline_q_round_bottom"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/q_round" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_q_round_center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="@+id/q_round"
-            app:layout_constraintStart_toStartOf="@+id/q_round" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_q_round_bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.3" />
-
-        <ImageView
-            android:id="@+id/left_q_mask"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/q_round"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_q_round_center"
-            app:layout_constraintStart_toStartOf="@+id/q_round"
-            app:layout_constraintTop_toTopOf="@+id/q_round"
-            app:srcCompat="@drawable/left_mask"
-            android:scaleY="1.0"
-            android:transformPivotY="0dp"
-            android:scaleType="fitXY"/>
-
-        <ImageView
-            android:id="@+id/right_q_mask"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:srcCompat="@drawable/right_mask"
-            app:layout_constraintStart_toEndOf="@+id/guideline_q_round_center"
-            app:layout_constraintEnd_toEndOf="@+id/q_round"
-            app:layout_constraintTop_toTopOf="@+id/q_round"
-            app:layout_constraintBottom_toBottomOf="@+id/q_round"
-            android:scaleY="1.0"
-            android:transformPivotY="18pt"
-            android:scaleType="fitXY"/>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_q_tail_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.2"
-            app:layout_constraintTop_toBottomOf="@+id/q_round" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_q_tail_bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.28"
-            app:layout_constraintTop_toBottomOf="@+id/guideline_q_tail_top" />
-
-        <ImageView
-            android:id="@+id/q_tail"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline_q_tail_bottom"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintStart_toEndOf="@+id/guideline_q_round_center"
-            app:layout_constraintTop_toBottomOf="@+id/guideline_q_tail_top"
-            app:srcCompat="@drawable/q_tail"
-            android:scaleY="1.0"
-            android:transformPivotY="0dp"/>
-
-        <TextView
-            android:id="@+id/uality"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
-            android:text="@string/half_qual"
-            android:textColor="#ffffffff"
-            android:textSize="24sp"
-            android:translationX="0dp"
-            android:alpha="1.0"
-            app:layout_constraintBottom_toBottomOf="@+id/q_round"
-            app:layout_constraintStart_toEndOf="@+id/q_round" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_control_txt_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.45" />
-
-        <TextView
-            android:id="@+id/control"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cntrl_intro"
-            android:textColor="#ffffffff"
-            android:textSize="18sp"
-            android:scaleY="1.0"
-            android:scaleX="1.0"
-            android:transformPivotY="20dp"
-            android:transformPivotX="25dp"
-            app:layout_constraintTop_toBottomOf="@+id/guideline_control_txt_top"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
 
     </android.support.constraint.motion.MotionLayout>
 
-</android.support.constraint.motion.MotionLayout>
+</android.support.constraint.ConstraintLayout>

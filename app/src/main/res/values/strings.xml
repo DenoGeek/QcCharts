@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">QcCharts</string>
+
+    <string name="half_qual">uality</string>
+    <string name="cntrl_intro">Control</string>
+
+    <string name="samples_request_main">Key in sample values</string>
+    <string name="samples_request_qsn">Do you have samples?</string>
+    <string name="mean_values_pose">I have mean values instead</string>
+    <string name="mean_values_request_main">Key in the mean values</string>
+
+    <string name="ok">Ok</string>
+    <string name="back">Back</string>
+    <string name="start">Start</string>
+
+    <string name="sample_size_hint">"What's the sample size?"</string>
+    <string name="sample_number_hint">"What's the sample number?"</string>
+    <string name="sample_size_indicate">Sample size:</string>
+    <string name="sample_number_indicate">Sample number:</string>
 </resources>
