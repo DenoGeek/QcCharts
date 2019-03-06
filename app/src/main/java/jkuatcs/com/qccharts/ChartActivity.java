@@ -3,6 +3,7 @@ package jkuatcs.com.qccharts;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -10,7 +11,10 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +57,21 @@ public class ChartActivity extends AppCompatActivity {
         rchart.setTouchEnabled(true);
 
         List<QData> qData = new ArrayList<>();
+
+        //get my string from intent
+        String jsonQDataList = getIntent().getStringExtra("qDataList");
+
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<QData>>(){}.getType();
+
+        qData = gson.fromJson(jsonQDataList,type);
+
+        if (getSupportActionBar() != null){
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
 //        qData.add(new QData(43,5));
 //        qData.add(new QData(49,6));
 //        qData.add(new QData(37,5));
@@ -202,4 +221,20 @@ public class ChartActivity extends AppCompatActivity {
         rchart.setData(data);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+
+            case android.R.id.home:
+
+                super.onBackPressed();
+                return true;
+
+            default:
+
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
 }

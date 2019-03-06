@@ -28,6 +28,8 @@ import android.widget.Toast;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 import jkuatcs.com.qccharts.adapter.RecyclerViewAdapter;
@@ -521,6 +523,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 sample_left_indicate_show.setText(String.valueOf(counter));
                 sample_no_indicate_show.setText(String.valueOf(progressIndicator));
 
+
+                //activate clicking of data_entry_btn_next
+                data_entry_btn_next.setClickable(true);
+
                 break;
 
             case R.id.mean_start_btn:
@@ -540,6 +546,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 sample_left_indicate_show.setText(String.valueOf(counter));
                 sample_no_indicate_show.setText(String.valueOf(progressIndicator));
+
+
+                //activate clicking of data_entry_btn_next
+                data_entry_btn_next.setClickable(true);
 
                 break;
 
@@ -561,6 +571,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 recyclerViewAdapter.clearData();
                 progressIndicator = 1;
 
+                //deactivate clicking of data_entry_btn_next
+                data_entry_btn_next.setClickable(false);
+
 
                 //reverse main motion layout transition
                 main_motion_layout_container.setTransition(R.id.main_motion_layout_reveal_end,R.id.main_motion_layout_reveal_start);
@@ -578,6 +591,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (isComplete){
 
                     Intent intent = new Intent(this, ChartActivity.class);
+
+                    //Pass my ArrayList via intent
+                    Gson gson = new Gson();
+
+                    //convert to a json string
+                    String jsonQdataList = gson.toJson(qDataList);
+
+                    //put in intent
+                    intent.putExtra("qDataList",jsonQdataList);
                     startActivity(intent);
                 } else{
 
@@ -625,6 +647,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //populate to recycler view
                 recyclerViewAdapter.updateData();
 
+                //Smooth scroll to bottom
+                recyclerView.smoothScrollToPosition(recyclerViewAdapter.getItemCount() - 1);
+
                 //decrement counter, passing one value
                 counter--;
 
@@ -643,6 +668,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     sample_no_indicate_show.setText("complete");
                     isComplete = true;
+
+                    //hide my keyboard
+                    hideMyKeyBoard();
                 }
 
 
@@ -669,7 +697,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ArrayList<Double> all = new ArrayList<>();
         for(String s: data.split(",")){
 
-            if(!s.isEmpty()){
+            if(!s.isEmpty() && !s.equals(".") && !s.equals("")){
 
                 all.add(Double.valueOf(s));
             }
@@ -719,3 +747,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 }
+
+//Interesting thing...whenever we come back to parent activity, or switch to another activity, state of parent is maintained.
+//Even its own instance variables are preserved. Never destroyed. That's why re-entry point is onResume(). Awesome!
