@@ -1,6 +1,8 @@
 package jkuatcs.com.qccharts.utils;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +52,6 @@ public class CalculationMatrix {
     //LCL and UCL methods for x  chart
     public double getXLCL(QcConstants qcConstants){
         double result = 0;
-
         result = getXbar() - (qcConstants.A_2 * getRbar());
         this.xlcl = result;
         return result;
