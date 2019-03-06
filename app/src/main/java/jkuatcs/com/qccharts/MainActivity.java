@@ -1,6 +1,7 @@
 package jkuatcs.com.qccharts;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -9,6 +10,7 @@ For UI/UX purposes
  */
 
 import android.support.constraint.motion.MotionLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
@@ -24,6 +26,13 @@ import android.widget.TextView;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import android.support.v7.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+import jkuatcs.com.qccharts.adapter.RecyclerViewAdapter;
+import jkuatcs.com.qccharts.models.QData;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -38,13 +47,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //Buttons
     private Button samples_main_select_btn,samples_txt_req__ok_btn, mean_values_main_select_btn, mean_edit_ok_btn,
-    start_button, mean_start_button;
+    start_button, mean_start_button, data_entry_btn_next, home_btn, plot_btn;
 
     //EditTexts
-    private EditText sample_size_num_edit,mean_sample_number_edit;
+    private EditText sample_size_num_edit,mean_sample_number_edit,data_entry_edit;
 
     //Textviews
-    private TextView input_sample_size_show, input_sample_number_show, mean_input_sample_number_show;
+    private TextView input_sample_size_show, input_sample_number_show, mean_input_sample_number_show,
+    sample_left_indicate_show, sample_no_indicate_show;
+
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapter recyclerViewAdapter;
 
     //Know the context of samples_btn click
     private int samples_btn_click_context = 0;
@@ -54,6 +67,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //Sample size and number values
     private int sample_size, sample_number;
+    private int counter = 0;
+    private int progressIndicator = 1;
+
+    //Help me process data the right way
+    private static boolean isMean;
+
+    private boolean isComplete = false;
+
+    //Arraylist holding my data
+    ArrayList<QData> qDataList = new ArrayList<>();
 
     //Keyboard gymnastics
     private View view;
@@ -81,11 +104,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Edittext instance
         sample_size_num_edit = findViewById(R.id.sample_size_edit);
         mean_sample_number_edit = findViewById(R.id.mean_sample_number_edit);
+        data_entry_edit = findViewById(R.id.data_entry_edit);
 
         //Textview instances
         input_sample_size_show = findViewById(R.id.input_sample_size_show);
         input_sample_number_show = findViewById(R.id.input_sample_number_show);
         mean_input_sample_number_show = findViewById(R.id.mean_input_sample_number_show);
+        sample_left_indicate_show = findViewById(R.id.sample_left_indicate_show);
+        sample_no_indicate_show = findViewById(R.id.sample_no_indicate_show);
+
+        //textColor
+        sample_left_indicate_show.setTextColor(getResources().getColor(R.color.colorAccent));
+        sample_no_indicate_show.setTextColor(getResources().getColor(R.color.colorAccent));
 
         //Button instances
         samples_main_select_btn = findViewById(R.id.samples_main_select_btn);
@@ -94,6 +124,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mean_edit_ok_btn = findViewById(R.id.mean_edit_ok_btn);
         start_button = findViewById(R.id.start_btn);
         mean_start_button = findViewById(R.id.mean_start_btn);
+        data_entry_btn_next = findViewById(R.id.data_entry_btn_next);
+        home_btn = findViewById(R.id.home_btn);
+        plot_btn = findViewById(R.id.plot_btn);
+
+        //recycler view
+        recyclerView = findViewById(R.id.recyclerView);
+
+        //set up my recycler view adapter
+        recyclerViewAdapter = new RecyclerViewAdapter(this, qDataList);
+        recyclerView.setAdapter(recyclerViewAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //set its listener to this
         samples_main_select_btn.setOnClickListener(this);
@@ -102,6 +143,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mean_edit_ok_btn.setOnClickListener(this);
         start_button.setOnClickListener(this);
         mean_start_button.setOnClickListener(this);
+        data_entry_btn_next.setOnClickListener(this);
+        home_btn.setOnClickListener(this);
+        plot_btn.setOnClickListener(this);
 
         //Keyboard gymnastics
         imm = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -278,7 +322,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     //set error
                     sample_size_num_edit.setError("Please key in a value");
-                } else{
+                } else if (Integer.valueOf(sample_size_num_edit.getText().toString()) < 2 && samples_btn_click_context == 1) {
+
+                    sample_size_num_edit.setError("Sample size should be at least 2");
+                }else {
 
                     //update context(moving to new motion layout state
                     samples_btn_click_context++;
@@ -288,6 +335,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         //Saving sample size
                         sample_size = Integer.valueOf(sample_size_num_edit.getText().toString());
+
+                        //Important error handling. Sample size should be at least 2
 
                         //Showing value keyed in
                         input_sample_size_show.setText(String.valueOf(sample_size));
@@ -451,23 +500,209 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.start_btn:
 
-                //Now, plotting given sample values and numbers, no mean
-                Toast.makeText(this,"I am at sample values buuuda",Toast.LENGTH_LONG).show();
+                //Set correct string resources
+                data_entry_edit.setHint(R.string.req_sample_hint);
+
 
                 //Do a transition of main_motion_layout to sweep this container for type selection away.
                 //Then fade in container for keying in comma separated values, with validation for each
+                main_motion_layout_container.setTransition(R.id.main_motion_layout_reveal_start,R.id.main_motion_layout_reveal_end);
+                main_motion_layout_container.transitionToEnd();
+
+                //Now set correct isMean status, to help single computing function
+                isMean = false;
+                isComplete = false;
+
+                //Set the counter value to the keyed in sample number value. Mutually exclusive by
+                //layout flow, so will never hold for mean, from this line of code
+                counter = sample_number;
+
+                //Show appropriate text in our widgets
+                sample_left_indicate_show.setText(String.valueOf(counter));
+                sample_no_indicate_show.setText(String.valueOf(progressIndicator));
 
                 break;
 
             case R.id.mean_start_btn:
 
-                //Now plotting given mean
-                Toast.makeText(this, "I am at means",Toast.LENGTH_LONG).show();
+                data_entry_edit.setHint(R.string.req_mean_hint);
+
+                main_motion_layout_container.setTransition(R.id.main_motion_layout_reveal_start,R.id.main_motion_layout_reveal_end);
+                main_motion_layout_container.transitionToEnd();
+
+                isMean = true;
+                isComplete = false;
+
+                counter = sample_number;
+
+                //sample size fixed to 2, x bar and r
+                sample_size = 2;
+
+                sample_left_indicate_show.setText(String.valueOf(counter));
+                sample_no_indicate_show.setText(String.valueOf(progressIndicator));
+
+                break;
+
+            case R.id.data_entry_btn_next:
+
+                //Do its gymnastics here. Entry validation depending on sample size
+                //Seen, using transitions, in xml, can specify if clickable or not. Nice
+
+                //Call function to compute entry
+                computeEntry(isMean ? 0 : 1);
+
+                break;
+
+            case R.id.home_btn:
+
+                //remove edit text errors, clear recycler view data. Set appropriate progress value
+                data_entry_edit.setError(null);
+                qDataList.clear();
+                recyclerViewAdapter.clearData();
+                progressIndicator = 1;
+
+
+                //reverse main motion layout transition
+                main_motion_layout_container.setTransition(R.id.main_motion_layout_reveal_end,R.id.main_motion_layout_reveal_start);
+                main_motion_layout_container.transitionToEnd();
+
+                break;
+
+            case R.id.plot_btn:
+
+                //Do activity switch here, for plotting purposes, ensuring we set the reentrace state right
+                //How it left is how it will enter? Won't have to set layouts within, first, to last state?
+                //The magic? The damn activity remembers the state!! Cause of lifecycle..hahahaa!!! Reenter at onResume,
+                //not onCreate!! Boom!!
+
+                if (isComplete){
+
+                    Intent intent = new Intent(this, ChartActivity.class);
+                    startActivity(intent);
+                } else{
+
+                    data_entry_edit.setError("Please key in all values then plot");
+                }
 
                 break;
 
 
         }
+    }
+
+    private void computeEntry(int mode){
+
+        //Compute based on whether we have means or not.
+        //Case 1, we don't have means. Looping sample number times. Go on decrementing counter based on it.
+        if (counter > 0){
+
+            //A valid input we can save
+            //Get the edittext entry
+            String data = data_entry_edit.getText().toString();
+
+            //save the data if string is correct size
+            int response = isRightSize(data);
+            if (response == 0){
+
+                //save my string, in my node
+                //Saving dependent on mode (mean or samples?)
+                //Will always be mutually exclusive for an entire cycle
+                switch (mode){
+
+                    case 0:
+                        //saving for mean values, xbar and r
+                        QData qData = new QData(getXBarR(data).get(0),getXBarR(data).get(1));
+                        qDataList.add(qData);
+
+                        break;
+
+                    case 1:
+                        //saving sample values
+                        QData qDataS = new QData(data);
+                        qDataList.add(qDataS);
+                }
+
+                //populate to recycler view
+                recyclerViewAdapter.updateData();
+
+                //decrement counter, passing one value
+                counter--;
+
+                //increment progressIndicator
+                progressIndicator++;
+
+                //remove text in there
+                data_entry_edit.setText(null);
+
+                //Show progress in appropriate widgets
+                sample_no_indicate_show.setText(String.valueOf(progressIndicator));
+                sample_left_indicate_show.setText(String.valueOf(counter));
+
+                if (progressIndicator == (sample_number + 1))
+                {
+
+                    sample_no_indicate_show.setText("complete");
+                    isComplete = true;
+                }
+
+
+            }else if (response == 1){
+
+                //set error in edit text
+                data_entry_edit.setError("You have excess values");
+            } else {
+
+                data_entry_edit.setError("You have few values");
+            }
+
+        } else {
+
+            //tell them data is full. Try shrinking edit text, hiding button focus, showing button plot. So premature now
+            Toast.makeText(this,"You have keyed in all data",Toast.LENGTH_LONG).show();
+            isComplete = true;
+        }
+
+    }
+
+    private int isRightSize(String data){
+
+        ArrayList<Double> all = new ArrayList<>();
+        for(String s: data.split(",")){
+
+            if(!s.isEmpty()){
+
+                all.add(Double.valueOf(s));
+            }
+        }
+
+        if (all.size() > sample_size )
+            return 1;
+
+        if (all.size() < sample_size)
+            return -1;
+
+        return 0;
+
+    }
+
+    private ArrayList<Double> getXBarR(String data){
+
+        ArrayList<Double> xBarR = new ArrayList<>();
+
+        for(String s: data.split(",")){
+
+            if (!s.isEmpty()){
+
+                xBarR.add(Double.valueOf(s));
+            }
+        }
+
+        return xBarR;
+    }
+
+    public static boolean isMeanComputing(){
+
+        return isMean;
     }
 
     private void hideMyKeyBoard(){

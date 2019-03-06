@@ -37,6 +37,152 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.65" />
 
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#ffffffff"
+        android:alpha="0.0"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@+id/guideline_recycler_top"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_recycler_bottom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_recycler_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_recycler_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.47" />
+
+    <EditText
+        android:id="@+id/data_entry_edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:digits="0123456789.,"
+        android:alpha="0.0"
+        android:visibility="gone"
+        android:clickable="false"
+        android:backgroundTint="#A71B82"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginRight="80dp"
+        app:layout_constraintTop_toBottomOf="@+id/guideline_recycler_bottom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/data_entry_btn_next"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:text="@string/next"
+        android:textColor="#ffffffff"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        android:alpha="0.0"
+        android:visibility="gone"
+        android:clickable="false"
+        android:background="@drawable/text_side_btn_bg"
+        app:layout_constraintStart_toEndOf="@+id/data_entry_edit"
+        app:layout_constraintTop_toTopOf="@+id/data_entry_edit"
+        app:layout_constraintBottom_toBottomOf="@+id/data_entry_edit"/>
+
+    <TextView
+        android:id="@+id/sample_no_indicate_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sample_no_indicate"
+        android:textColor="#ff707070"
+        android:alpha="0.0"
+        android:visibility="gone"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/data_entry_edit"
+        app:layout_constraintStart_toStartOf="@+id/data_entry_edit" />
+
+    <TextView
+        android:id="@+id/sample_left_indicate_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/samples_left_indicate"
+        android:textColor="#ff707070"
+        android:alpha="0.0"
+        android:visibility="gone"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/sample_no_indicate_txt"
+        app:layout_constraintEnd_toEndOf="@+id/sample_no_indicate_txt" />
+
+    <TextView
+        android:id="@+id/sample_no_indicate_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="#ff707070"
+        android:alpha="0.0"
+        android:visibility="gone"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintTop_toTopOf="@+id/sample_no_indicate_txt"
+        app:layout_constraintStart_toEndOf="@+id/sample_no_indicate_txt" />
+
+    <TextView
+        android:id="@+id/sample_left_indicate_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textColor="#ff707070"
+        android:alpha="0.0"
+        android:visibility="gone"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintTop_toTopOf="@+id/sample_left_indicate_txt"
+        app:layout_constraintStart_toEndOf="@+id/sample_left_indicate_txt" />
+
+    <Button
+        android:id="@+id/plot_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/plot_btn"
+        android:layout_marginTop="34dp"
+        android:alpha="0.0"
+        android:visibility="gone"
+        android:clickable="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sample_left_indicate_txt"/>
+
+    <Button
+        android:id="@+id/home_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home"
+        android:textColor="#ff127979"
+        android:clickable="false"
+        android:alpha="0.0"
+        android:visibility="gone"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@+id/plot_btn"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
     <android.support.constraint.motion.MotionLayout
         android:id="@+id/type_selection_motion_layout"
         android:layout_width="match_parent"
@@ -47,7 +193,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="visible"
+        android:translationX="0dp">
 
 
         <ImageView
@@ -358,7 +506,9 @@
         app:layout_constraintTop_toBottomOf="@+id/guideline_custom_q_top"
         app:layout_constraintBottom_toTopOf="@+id/guideline_custom_q_bottom"
         app:layout_constraintStart_toEndOf="@+id/guideline_custom_q_start"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_custom_q_end">
+        app:layout_constraintEnd_toStartOf="@+id/guideline_custom_q_end"
+        android:visibility="visible"
+        android:translationX="0dp">
 
         <ImageView
             android:id="@+id/q_round"

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import jkuatcs.com.qccharts.MainActivity;
 import jkuatcs.com.qccharts.R;
 import jkuatcs.com.qccharts.models.QData;
 
@@ -50,10 +51,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        holder.sno.setText(data.get(position).size_values);
-        holder.sampledata.setText((int) data.get(position).x_bar);
-        holder.xbar.setText((int) data.get(position).x_bar);
-        holder.r.setText((int) data.get(position).r);
+        holder.sno.setText(String.valueOf(position + 1));
+
+        //Put sample data value based on what we are computing
+        if (MainActivity.isMeanComputing()){
+            holder.sampledata.setText("N/A");
+        } else{
+
+            holder.sampledata.setText(String.valueOf(data.get(position).size_values));
+        }
+        holder.xbar.setText(String.valueOf(data.get(position).x_bar));
+        holder.r.setText(String.valueOf(data.get(position).r));
 
     }
 
@@ -63,6 +71,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return data.size();
     }
 
+    public void updateData(){
+        this.notifyDataSetChanged();
+    }
+
+    public void clearData(){
+
+        this.data.clear();
+        this.notifyDataSetChanged();
+    }
 
 
 
