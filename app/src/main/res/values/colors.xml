@@ -11,4 +11,7 @@
     <color name="divider">#BDBDBD</color>
 
     <color name="faint_color">#c0c0c0</color>
+
+    <color name="dark">#000</color>
+    <color name="grey">#0fffcf</color>
 </resources>

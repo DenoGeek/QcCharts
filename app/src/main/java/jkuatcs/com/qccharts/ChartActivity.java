@@ -53,19 +53,35 @@ public class ChartActivity extends AppCompatActivity {
         rchart.setTouchEnabled(true);
 
         List<QData> qData = new ArrayList<>();
-        qData.add(new QData(43,5));
-        qData.add(new QData(49,6));
-        qData.add(new QData(37,5));
-        qData.add(new QData(44,7));
-        qData.add(new QData(45,7));
-        qData.add(new QData(37,4));
-        qData.add(new QData(51,8));
-        qData.add(new QData(46,6));
-        qData.add(new QData(43,4));
-        qData.add(new QData(47,6));
+//        qData.add(new QData(43,5));
+//        qData.add(new QData(49,6));
+//        qData.add(new QData(37,5));
+//        qData.add(new QData(44,7));
+//        qData.add(new QData(45,7));
+//        qData.add(new QData(37,4));
+//        qData.add(new QData(51,8));
+//        qData.add(new QData(46,6));
+//        qData.add(new QData(43,4));
+//        qData.add(new QData(47,6));
 
-        setXData(qData,5);
-        setRData(qData,5);
+//        qData.add(new QData("10,10.2,11.3,12.4"));
+//        qData.add(new QData("10.3,10.9,10.7,11.7"));
+//        qData.add(new QData("11.5,10.7,11.4,12.4"));
+//        qData.add(new QData("11,11.3,10.7,11.4"));
+//        qData.add(new QData("11.3,11.6,11.0,12.1"));
+//        qData.add(new QData("10.7,11.4,10.7,11"));
+//        qData.add(new QData("11.3,11.4,11.1,10.3"));
+//        qData.add(new QData("12.3,12.1,12.7,10.7"));
+//        qData.add(new QData("11,13.1,13.1,12.4"));
+//        qData.add(new QData("11.3,12.1,10.7,11.5"));
+//        qData.add(new QData("12.5,11.9,11.8,11.3"));
+//        qData.add(new QData("11.9,12.1,11.6,11.4"));
+//        qData.add(new QData("12.1,11.1,12.1,11.7"));
+//        qData.add(new QData("11.9,12.1,13.1,12.0"));
+//        qData.add(new QData("10.6,11.9,11.7,12.1"));
+
+        setXData(qData,4);
+        setRData(qData,4);
 
     }
 
