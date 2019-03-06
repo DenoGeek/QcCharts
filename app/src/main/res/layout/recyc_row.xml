@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <LinearLayout
@@ -19,14 +19,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sample no"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textStyle="normal"
                 android:textColor="@color/dark"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sno"
+                android:textSize="14sp"
+                android:textColor="#ff707070"
                 android:id="@+id/tvsno"/>
         </LinearLayout>
 
@@ -39,7 +41,7 @@
             />
 
         <LinearLayout
-            android:layout_width="180dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="5dp">
@@ -48,14 +50,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sample data "
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textStyle="normal"
                 android:textColor="@color/dark"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sno"
+                android:textSize="14sp"
+                android:textColor="#ff707070"
                 android:id="@+id/tvsampledata"/>
         </LinearLayout>
 
@@ -77,14 +81,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="X bar"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textStyle="normal"
                 android:textColor="@color/dark"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="x"
+                android:textSize="14sp"
+                android:textColor="#ff707070"
                 android:id="@+id/tvx"/>
         </LinearLayout>
 
@@ -106,14 +112,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="R"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textStyle="normal"
                 android:textColor="@color/dark"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="r"
+                android:textSize="14sp"
+                android:textColor="#ff707070"
                 android:id="@+id/tvr"/>
         </LinearLayout>
     </LinearLayout>

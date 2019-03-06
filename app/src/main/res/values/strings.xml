@@ -17,4 +17,14 @@
     <string name="sample_number_hint">"What's the sample number?"</string>
     <string name="sample_size_indicate">Sample size:</string>
     <string name="sample_number_indicate">Sample number:</string>
+
+    <string name="req_sample_data">Key in your sample data, comma separated</string>
+    <string name="req_mean_data">Key in your x bar and r bar values, in order, comma separated</string>
+    <string name="req_sample_hint">Sample data, comma separated..</string>
+    <string name="req_mean_hint">x-bar, r</string>
+
+    <string name="sample_no_indicate">Sample no:</string>
+    <string name="samples_left_indicate">Samples left:</string>
+    <string name="home">Home</string>
+    <string name="next">Next</string>
 </resources>
