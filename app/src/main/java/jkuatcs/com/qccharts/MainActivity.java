@@ -589,6 +589,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     //put in intent
                     intent.putExtra("qDataList",jsonQdataList);
+
+                    //Put our sample size in intent
+                    intent.putExtra("sampleSize",String.valueOf(sample_size));
+
                     startActivity(intent);
                 } else{
 

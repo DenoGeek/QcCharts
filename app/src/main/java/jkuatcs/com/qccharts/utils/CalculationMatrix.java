@@ -25,13 +25,24 @@ public class CalculationMatrix {
     public CalculationMatrix(List<QData> qData) {
         this.qData = qData;
 
-        int sumx = 0, sumr = 0;
+        //Logical error. Put int instead of double. Thus truncating .x
+        double sumx = 0, sumr = 0;
         for(QData q:qData){
+
             sumx += q.x_bar;
+
             sumr += q.r;
+
+            Log.e("Error","Value of xbar = " + String.valueOf(q.x_bar));
         }
         xmean = sumx/(double)qData.size();
         rbar = sumr/(double)qData.size();
+
+        Log.e("Error","Value of x mean" + String.valueOf(xmean));
+        Log.e("Error", "Value of r bar" + String.valueOf(rbar));
+        Log.e("Error","Value of sumx = " + String.valueOf(sumx));
+        Log.e("Error","Value of sumr = " + String.valueOf(sumr));
+        Log.e("Error","Value of qData.size() = " + String.valueOf(qData.size()));
     }
 
 
@@ -87,7 +98,7 @@ public class CalculationMatrix {
         if(countabove > 0 || countbelow > 0){
             message = countabove+" points lies above the UCL and "+countbelow+" lie below the LCL hence process is not under control";
         }else{
-            message = "Range chart lies within the control lines hence process is under control";
+            message = "X bar chart lies within the control lines hence process is under control";
         }
         return message;
     }

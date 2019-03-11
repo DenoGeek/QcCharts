@@ -1,8 +1,14 @@
 package jkuatcs.com.qccharts.models;
 
 import android.content.Intent;
+import android.util.Log;
+import android.widget.Toast;
 
+import java.math.BigDecimal;
+import java.nio.DoubleBuffer;
 import java.util.ArrayList;
+
+import jkuatcs.com.qccharts.MainActivity;
 
 // one row in the table
 public class QData {
@@ -20,7 +26,9 @@ public class QData {
     //Formulate a function to check size of entered data, to ensure as big as sample size, before storing
     public QData(String coma_values){
         this.size_values = coma_values;
-        double total = 0;
+
+        //Added a .0 to provide proper double precision
+        double total = 0.0;
         double largest = getSizesAsDoubles().get(0);
         double smallest = getSizesAsDoubles().get(0);
 
@@ -31,8 +39,15 @@ public class QData {
         }
 
         //Finally extracted x_bar and r values
-        this.x_bar = total/getSizesAsDoubles().size();
-        this.r = largest-smallest;
+        this.x_bar = Double.valueOf(String.valueOf(BigDecimal.valueOf(total).divide(BigDecimal.valueOf(getSizesAsDoubles().size()))));
+
+        //Use big decimal, to avoid precision loss
+        this.r = Double.valueOf(String.valueOf(BigDecimal.valueOf(largest).subtract(BigDecimal.valueOf(smallest))));
+
+        //Log to see whether this has worked
+        Log.e("Info","Value of smallest = " + String.valueOf(smallest));
+        Log.e("Info", "Value of largest = " + String.valueOf(largest));
+
     }
 
     //Function to change string to double values

@@ -3,6 +3,7 @@ package jkuatcs.com.qccharts;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -99,13 +100,14 @@ public class ChartActivity extends AppCompatActivity {
 //        qData.add(new QData("11.9,12.1,13.1,12.0"));
 //        qData.add(new QData("10.6,11.9,11.7,12.1"));
 
-        setXData(qData,4);
-        setRData(qData,4);
+        setXData(qData,Integer.valueOf(getIntent().getStringExtra("sampleSize")));
+        setRData(qData,Integer.valueOf(getIntent().getStringExtra("sampleSize")));
 
     }
 
     private void setXData(List<QData> qData,int sample_size) {
 
+        Log.e("Error","Passed sample size = " + String.valueOf(sample_size));
 
         CalculationMatrix calculationMatrix= new CalculationMatrix(qData);
         QcTable qcTable= new QcTable();
